@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 12 janv. 2017 09:28:28 by Hibernate Tools 5.2.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.trucky.Domain.VehicleModel" table="vehicle_model" catalog="trucky" optimistic-lock="version">
+        <id name="idVeh" type="java.lang.Integer">
+            <column name="id_veh" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="licence" class="com.trucky.Domain.Licence" fetch="select">
+            <column name="id_lic" />
+        </many-to-one>
+        <property name="libelleVeh" type="string">
+            <column name="libelle_veh" length="25" not-null="true" />
+        </property>
+        <property name="speedMaxVeh" type="int">
+            <column name="speed_max_veh" not-null="true" />
+        </property>
+        <set name="drives" table="drive" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_veh" not-null="true" />
+            </key>
+            <one-to-many class="com.trucky.Domain.Drive" />
+        </set>
+        <set name="vehicles" table="vehicle" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_veh" not-null="true" />
+            </key>
+            <one-to-many class="com.trucky.Domain.Vehicle" />
+        </set>
+        <set name="incidents" table="incident" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_veh" not-null="true" />
+            </key>
+            <one-to-many class="com.trucky.Domain.Incident" />
+        </set>
+    </class>
+</hibernate-mapping>

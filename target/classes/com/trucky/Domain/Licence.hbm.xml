@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 12 janv. 2017 09:28:28 by Hibernate Tools 5.2.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.trucky.Domain.Licence" table="licence" catalog="trucky" optimistic-lock="version">
+        <id name="idLic" type="java.lang.Integer">
+            <column name="id_lic" />
+            <generator class="identity" />
+        </id>
+        <property name="libLic" type="string">
+            <column name="lib_lic" length="50" />
+        </property>
+        <property name="codeLic" type="int">
+            <column name="code_lic" not-null="true" unique="true" />
+        </property>
+        <set name="users" table="own" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="id_lic" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.trucky.Domain.User">
+                <column name="id_user" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="vehicleModels" table="vehicle_model" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_lic" />
+            </key>
+            <one-to-many class="com.trucky.Domain.VehicleModel" />
+        </set>
+    </class>
+</hibernate-mapping>

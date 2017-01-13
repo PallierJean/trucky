@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 12 janv. 2017 09:28:28 by Hibernate Tools 5.2.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.trucky.Domain.User" table="user" catalog="trucky" optimistic-lock="version">
+        <id name="idUser" type="java.lang.Integer">
+            <column name="id_user" />
+            <generator class="identity" />
+        </id>
+        <property name="mailUser" type="string">
+            <column name="mail_user" length="40" />
+        </property>
+        <property name="passUser" type="string">
+            <column name="pass_user" />
+        </property>
+        <property name="rightUser" type="java.lang.Integer">
+            <column name="right_user" />
+        </property>
+        <property name="hoursWork" type="double">
+            <column name="hours_work" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="hoursBreak" type="double">
+            <column name="hours_break" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="firstnameUser" type="string">
+            <column name="firstname_user" length="50" not-null="true" />
+        </property>
+        <property name="lastnameUser" type="string">
+            <column name="lastname_user" length="50" />
+        </property>
+        <set name="licences" table="own" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_user" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.trucky.Domain.Licence">
+                <column name="id_lic" not-null="true" />
+            </many-to-many>
+        </set>
+        <one-to-one name="truckDriver" class="com.trucky.Domain.TruckDriver"></one-to-one>
+        <set name="missions" table="in_charge_of" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="id_user" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.trucky.Domain.Mission">
+                <column name="id_mis" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="interventions" table="support" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_user" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.trucky.Domain.Intervention">
+                <column name="id_int" not-null="true" />
+            </many-to-many>
+        </set>
+        <one-to-one name="manager" class="com.trucky.Domain.Manager"></one-to-one>
+        <set name="missions_1" table="mission" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_user" not-null="true" />
+            </key>
+            <one-to-many class="com.trucky.Domain.Mission" />
+        </set>
+        <one-to-one name="driver" class="com.trucky.Domain.Driver"></one-to-one>
+        <set name="usersForIdUser" table="managed" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_user_1" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.trucky.Domain.User">
+                <column name="id_user" not-null="true" />
+            </many-to-many>
+        </set>
+        <one-to-one name="interventionAgent" class="com.trucky.Domain.InterventionAgent"></one-to-one>
+        <set name="usersForIdUser1" table="managed" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_user" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.trucky.Domain.User">
+                <column name="id_user_1" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="drives" table="drive" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_user" not-null="true" />
+            </key>
+            <one-to-many class="com.trucky.Domain.Drive" />
+        </set>
+    </class>
+</hibernate-mapping>

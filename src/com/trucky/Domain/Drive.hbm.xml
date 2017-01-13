@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 12 janv. 2017 09:28:28 by Hibernate Tools 5.2.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.trucky.Domain.Drive" table="drive" catalog="trucky" optimistic-lock="version">
+        <composite-id name="id" class="com.trucky.Domain.DriveId">
+            <key-property name="immatTru" type="string">
+                <column name="immat_tru" length="9" />
+            </key-property>
+            <key-property name="idVeh" type="int">
+                <column name="id_veh" />
+            </key-property>
+            <key-property name="idUser" type="int">
+                <column name="id_user" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="user" class="com.trucky.Domain.User" update="false" insert="false" fetch="select">
+            <column name="id_user" not-null="true" />
+        </many-to-one>
+        <many-to-one name="vehicle" class="com.trucky.Domain.Vehicle" update="false" insert="false" fetch="select">
+            <column name="immat_tru" length="9" not-null="true" />
+        </many-to-one>
+        <many-to-one name="vehicleModel" class="com.trucky.Domain.VehicleModel" update="false" insert="false" fetch="select">
+            <column name="id_veh" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

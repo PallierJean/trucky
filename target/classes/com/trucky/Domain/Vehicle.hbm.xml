@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 12 janv. 2017 09:28:28 by Hibernate Tools 5.2.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.trucky.Domain.Vehicle" table="vehicle" catalog="trucky" optimistic-lock="version">
+        <composite-id name="id" class="com.trucky.Domain.VehicleId">
+            <key-property name="immatTru" type="string">
+                <column name="immat_tru" length="9" />
+            </key-property>
+            <key-property name="idVeh" type="int">
+                <column name="id_veh" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="vehicleModel" class="com.trucky.Domain.VehicleModel" update="false" insert="false" fetch="select">
+            <column name="id_veh" not-null="true" />
+        </many-to-one>
+        <property name="ctrlTechTru" type="timestamp">
+            <column name="ctrl_tech_tru" length="19" />
+        </property>
+        <property name="areaTru" type="binary">
+            <column name="area_tru" />
+        </property>
+        <property name="etat" type="java.lang.Integer">
+            <column name="etat" />
+        </property>
+        <set name="drives" table="drive" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="immat_tru" length="9" not-null="true" />
+            </key>
+            <one-to-many class="com.trucky.Domain.Drive" />
+        </set>
+        <set name="incidents" table="incident" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="immat_tru" length="9" not-null="true" />
+            </key>
+            <one-to-many class="com.trucky.Domain.Incident" />
+        </set>
+    </class>
+</hibernate-mapping>
