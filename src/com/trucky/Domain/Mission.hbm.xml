@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 12 janv. 2017 09:28:28 by Hibernate Tools 5.2.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.trucky.Domain.Mission" table="mission" catalog="trucky" optimistic-lock="version">
+        <id name="idMis" type="java.lang.Integer">
+            <column name="id_mis" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="user" class="com.trucky.Domain.User" fetch="select">
+            <column name="id_user" not-null="true" />
+        </many-to-one>
+        <property name="hourStartMis" type="timestamp">
+            <column name="hour_start_mis" length="19" not-null="true" />
+        </property>
+        <property name="hourEndMis" type="timestamp">
+            <column name="hour_end_mis" length="19" />
+        </property>
+        <property name="nameSenMis" type="string">
+            <column name="name_sen_mis" length="50" not-null="true" />
+        </property>
+        <property name="nameRecMis" type="string">
+            <column name="name_rec_mis" length="50" not-null="true" />
+        </property>
+        <property name="qualitySenMis" type="string">
+            <column name="quality_sen_mis" not-null="true" />
+        </property>
+        <property name="qualityRecMis" type="string">
+            <column name="quality_rec_mis" not-null="true" />
+        </property>
+        <property name="numSenMis" type="int">
+            <column name="num_sen_mis" not-null="true" />
+        </property>
+        <property name="numRecMis" type="int">
+            <column name="num_rec_mis" not-null="true" />
+        </property>
+        <property name="latMis" type="double">
+            <column name="lat_mis" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="longMis" type="double">
+            <column name="long_mis" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="state" type="string">
+            <column name="state" length="25" />
+        </property>
+        <set name="users" table="in_charge_of" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_mis" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.trucky.Domain.User">
+                <column name="id_user" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

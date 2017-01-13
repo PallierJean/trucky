@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory name="trucky">
+  <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+  <property name="hibernate.connection.password"/>
+  <property name="hibernate.connection.url">jdbc:mysql://localhost/trucky</property>
+  <property name="hibernate.connection.username">root</property>
+  <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+  <mapping class="com.trucky.Domain.Agence" resource="com/trucky/Domain/Agence.hbm.xml"/>
+  <mapping class="com.trucky.Domain.Drive" resource="com/trucky/Domain/Drive.hbm.xml"/>
+  <mapping class="com.trucky.Domain.Driver" resource="com/trucky/Domain/Driver.hbm.xml"/>
+  <mapping class="com.trucky.Domain.Incident" resource="com/trucky/Domain/Incident.hbm.xml"/>
+  <mapping class="com.trucky.Domain.Intervention" resource="com/trucky/Domain/Intervention.hbm.xml"/>
+  <mapping class="com.trucky.Domain.InterventionAgent" resource="com/trucky/Domain/InterventionAgent.hbm.xml"/>
+  <mapping class="com.trucky.Domain.Licence" resource="com/trucky/Domain/Licence.hbm.xml"/>
+  <mapping class="com.trucky.Domain.Manager" resource="com/trucky/Domain/Manager.hbm.xml"/>
+  <mapping class="com.trucky.Domain.Mission" resource="com/trucky/Domain/Mission.hbm.xml"/>
+  <mapping class="com.trucky.Domain.TruckDriver" resource="com/trucky/Domain/TruckDriver.hbm.xml"/>
+  <mapping class="com.trucky.Domain.User" resource="com/trucky/Domain/User.hbm.xml"/>
+  <mapping class="com.trucky.Domain.Vehicle" resource="com/trucky/Domain/Vehicle.hbm.xml"/>
+  <mapping class="com.trucky.Domain.VehicleModel" resource="com/trucky/Domain/VehicleModel.hbm.xml"/>
+ </session-factory>
+</hibernate-configuration>

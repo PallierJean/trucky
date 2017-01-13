@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 12 janv. 2017 09:28:28 by Hibernate Tools 5.2.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.trucky.Domain.Intervention" table="intervention" catalog="trucky" optimistic-lock="version">
+        <id name="idInt" type="int">
+            <column name="id_int" />
+            <generator class="assigned" />
+        </id>
+        <property name="hourStartInt" type="timestamp">
+            <column name="hour_start_int" length="19" not-null="true" />
+        </property>
+        <property name="hourEndInt" type="timestamp">
+            <column name="hour_end_int" length="19" />
+        </property>
+        <property name="latInt" type="double">
+            <column name="lat_int" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="longInt" type="double">
+            <column name="long_int" precision="22" scale="0" not-null="true" />
+        </property>
+        <set name="incidents" table="incident" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_int" not-null="true" />
+            </key>
+            <one-to-many class="com.trucky.Domain.Incident" />
+        </set>
+        <set name="users" table="support" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="id_int" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.trucky.Domain.User">
+                <column name="id_user" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

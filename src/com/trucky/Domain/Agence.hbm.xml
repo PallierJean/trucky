@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 12 janv. 2017 09:28:28 by Hibernate Tools 5.2.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.trucky.Domain.Agence" table="agence" catalog="trucky" optimistic-lock="version">
+        <id name="idAg" type="java.lang.Integer">
+            <column name="id_ag" />
+            <generator class="identity" />
+        </id>
+        <property name="nameAg" type="string">
+            <column name="name_ag" length="50" not-null="true" />
+        </property>
+        <property name="addressAg" type="string">
+            <column name="address_ag" length="250" not-null="true" />
+        </property>
+        <property name="geolocAg" type="binary">
+            <column name="geoloc_ag" not-null="true" />
+        </property>
+        <set name="managers" table="manager" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_ag" />
+            </key>
+            <one-to-many class="com.trucky.Domain.Manager" />
+        </set>
+    </class>
+</hibernate-mapping>
